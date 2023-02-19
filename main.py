@@ -5,13 +5,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.getenv('YOUTUBE_KEY')
-
-# YT_API_KEY скопирован из гугла и вставлен в переменные окружения
-api_key: str = os.dotenv('YOUTUBE_KEY')
+# API_KEY = os.getenv('YOUTUBE_KEY')
+API_KEY = os.environ.get('YOUTUBE_KEY')
 
 # создать специальный объект для работы с API
-youtube = build('youtube', 'v3', developerKey=api_key)
+youtube = build('youtube', 'v3', developerKey=API_KEY)
 
 import json
 
@@ -19,8 +17,6 @@ import json
 channel_id = "UCByhZ-JEe5OOZSuq0uaXOng"
 
 channel = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
-
-print(json.dumps(dict_to_print, indent=2, ensure_ascii=False))
 
 
 class Youtube:
@@ -40,3 +36,9 @@ class Youtube:
 
     def print_info(self):
         return self.channel_info
+
+    if __name__ == "__main__":
+        print_info()
+
+
+print(channel)
