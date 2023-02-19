@@ -41,4 +41,4 @@ class Youtube:
         print_info()
 
 
-print(channel)
+
