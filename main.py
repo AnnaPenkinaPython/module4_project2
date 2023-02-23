@@ -1,28 +1,26 @@
 import os
 from googleapiclient.discovery import build
 
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
-load_dotenv()
-
+#load_dotenv()
+YOUTUBE_KEY = "AIzaSyDDVPXfBre2oshFEgqCh2NjQz9AQXmb10U"
 # API_KEY = os.getenv('YOUTUBE_KEY')
-API_KEY = os.environ.get('YOUTUBE_KEY')
-
-# создать специальный объект для работы с API
-youtube = build('youtube', 'v3', developerKey=API_KEY)
-
-import json
-
-# channel_id = '"UCByhZ-JEe5OOZSuq0uaXOng"'  # Нежный редактор
-channel_id = "UCByhZ-JEe5OOZSuq0uaXOng"
-
-channel = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
+API_KEY = YOUTUBE_KEY
 
 
 class Youtube:
+    channel_id = "UCByhZ-JEe5OOZSuq0uaXOng"
+    youtube = build('youtube', 'v3', developerKey=API_KEY)
+    channel = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
 
-    def __init__(self, channel_id):
+    def __init__(self, channel_id, channel_name, channel_description, hm_followers, hm_videos, hm_views):
         self.channel_id = channel_id
+        self.channel_name = channel_name
+        self.channel_description = channel_description
+        self.hw_followers = hm_followers
+        self.hw_videos = hm_videos
+        self.hm_views = hm_views
         self.channel_info = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
 
     def get_service(self):
@@ -39,6 +37,3 @@ class Youtube:
 
     if __name__ == "__main__":
         print_info()
-
-
-
