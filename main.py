@@ -2,7 +2,7 @@ import os
 from googleapiclient.discovery import build
 
 from dotenv import load_dotenv
-# YOUTUBE_KEY = "AIzaSyDDVPXfBre2oshFEgqCh2NjQz9AQXmb10U"
+YOUTUBE_KEY = "AIzaSyDDVPXfBre2oshFEgqCh2NjQz9AQXmb10U"
 
 class Youtube:
     channel_id = "UCByhZ-JEe5OOZSuq0uaXOng"
@@ -12,8 +12,8 @@ class Youtube:
 
     def __init__(self, channel_id, channel_name, channel_description, hm_followers, hm_videos, hm_views):
         load_dotenv()
-        api_key: str = os.getenv('YOUTUBE_KEY')
-        youtube = build('youtube', 'v3', developerKey=api_key)
+        # api_key: str = os.getenv('YOUTUBE_KEY')
+        youtube = build('youtube', 'v3', developerKey=YOUTUBE_KEY)
         self.channel_id = channel_id
         self.channel_name = channel_name
         self.channel_description = channel_description
@@ -23,7 +23,6 @@ class Youtube:
         self.channel_info = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
 
     def get_service(self):
-        youtube = build('youtube', 'v3', developerKey=api_key)
         service = youtube  # build('youtube', 'v3', developerKey=api_key)
         return service
 
